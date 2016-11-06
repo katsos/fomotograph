@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'httparty'
 require 'json'
+require_relative 'models/product.rb'
 
 get '/' do
   @page_title = "Home"
@@ -14,12 +15,7 @@ end
 
 ## ALL PRODUCTS
 get '/products' do
-  DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos']
-  @products = []
-  LOCATIONS = ['canada', 'england', 'france', 'ireland', 'mexico', 'scotland', 'taiwan', 'us']
-  LOCATIONS.each do |location|
-    @products.push DATA.select { |product| product['location'] == location }.sample
-  end
+  @products = Product.all
   erb "<!DOCTYPE html>
   <html>
   <head>
@@ -70,8 +66,7 @@ end
 
 ## PAGE DISPLAYING ALL PHOTOS FROM ONE LOCATION
 get '/products/location/:location' do
-  DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos']
-  @products = DATA.select{ |product| product['location'] == params[:location] }
+  @products = Product.find_by_location( params[:location] )
   erb "<!DOCTYPE html>
   <html>
   <head>
@@ -124,8 +119,7 @@ end
 
 ## PRODUCT BY ID
 get '/products/:id' do
-  DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos']
-  @product = DATA.select { |prod| prod['id'] == params[:id].to_i }.first
+  @product = Product.find_by_id( params[:id] )
   erb "<!DOCTYPE html>
   <html>
   <head>
