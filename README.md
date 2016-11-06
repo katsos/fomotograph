@@ -7,7 +7,5 @@ It gives a you a monolithic ruby app running on Sinatra and asks you to split it
 
 Setup ruby locally &check;  
 Extract ruby code from the templates &check;  
-Create Product model  
+Create Product model &check;  
 Create views using the general layout &check;  
-Create Product controller  
-Create routes  
