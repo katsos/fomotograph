@@ -3,6 +3,12 @@ require 'httparty'
 require 'json'
 require_relative 'models/product.rb'
 
+helpers do
+  def titlecase(title)
+    title != 'us' ? title.capitalize : title.upcase
+  end
+end
+
 get '/' do
   @page_title = "Home"
   erb :index
