@@ -37,8 +37,8 @@ class Product
     self.all.select { |product| product.id == id.to_i }.first
   end
 
-  def self.find_deals
-    self.all.select { |product| product.price < 10 }
+  def self.find_deals(limit)
+    self.all.select { |product| product.price < limit }
   end
 
 end

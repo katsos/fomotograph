@@ -38,7 +38,8 @@ get '/products/:id' do
 end
 
 get '/deals' do
-  @products = Product.find_deals
+  @limit = 10
+  @products = Product.find_deals( @limit )
   @page_title = 'Deals'
   erb :deals
 end

@@ -1,4 +1,4 @@
-<h1> Deals </h1>
+<h1> Deals under &#36;<%= @limit %> </h1>
 <div id='wrapper'>
 
     <% @products.each do |product| %>
@@ -8,7 +8,7 @@
                 <img src='<%= product.url %>' />
             </div>
             <div class='caption'>
-                <%= product.title %> for only &#36;<%= product.price %> !
+                <%= product.title %> for &#36;<%= product.price %> only!
             </div>
         </div>
     </a>
