@@ -2,8 +2,8 @@ require 'sinatra'
 require 'httparty'
 require 'json'
 
+## HOME LANDING PAGE SHOWING BANNER PHOTO, TITLE, AND SUBTITLE
 get '/' do
-  # HOME LANDING PAGE SHOWING BANNER PHOTO, TITLE, AND SUBTITLE
   erb "<!DOCTYPE html>
   <html>
   <head>
@@ -39,7 +39,6 @@ get '/' do
   </body>
   </html>"
 end
-
 
 get '/team' do
   # TEAM PAGE LISTING THE TEAM MEMBERS
@@ -87,8 +86,9 @@ get '/team' do
   </html>"
 end
 
+## PRODUCTS PAGE LISTING ALL THE PRODUCTS
 get '/products' do
-  # PRODUCTS PAGE LISTING ALL THE PRODUCTS
+  DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos']
   erb "<!DOCTYPE html>
   <html>
   <head>
@@ -106,8 +106,6 @@ get '/products' do
         <a href='/team' class='nav'>Team</a>
         <a href='/products' class='nav'>Products</a>
       </div>
-
-      <% DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos'] %>
 
       <div id='main'>
         <h1> All Products </h1>
@@ -141,8 +139,9 @@ get '/products' do
   </html>"
 end
 
+## PAGE DISPLAYING ALL PHOTOS FROM ONE LOCATION
 get '/products/location/:location' do
-  # PAGE DISPLAYING ALL PHOTOS FROM ONE LOCATION
+  DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos']
   erb "<!DOCTYPE html>
   <html>
   <head>
@@ -162,8 +161,6 @@ get '/products/location/:location' do
       </div>
 
       <div id='main'>
-
-        <% DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos'] %>
 
         <h1> <%= params[:location] != 'us' ? params[:location].capitalize : params[:location].upcase %> </h1>
         <div id='wrapper'>
@@ -197,12 +194,12 @@ get '/products/location/:location' do
   </html>"
 end
 
+## PAGE DISPLAYING ONE PRODUCT WITH A GIVEN ID
 get '/products/:id' do
-  # PAGE DISPLAYING ONE PRODUCT WITH A GIVEN ID
+  DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos']
   erb "<!DOCTYPE html>
   <html>
   <head>
-    <% DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['data'] %>
     <% product = DATA.select { |prod| prod['id'] == params[:id].to_i }.first %>
     <title>Fomotograph | <%= product['title'] %> </title>
     <link rel='stylesheet' type='text/css' href='<%= url('/style.css') %>'>
