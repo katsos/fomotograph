@@ -9,3 +9,4 @@ Setup ruby locally &check;
 Extract ruby code from the templates &check;  
 Create Product model &check;  
 Create views using the general layout &check;  
+Create "Deals" page &check;
