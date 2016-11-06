@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fomotograph | <%= @page_title %> </title>
+    <link rel='stylesheet' href='<%= url('/style.css') %>'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Work+Sans:400,500,600'>
+</head>
+
+<body>
+
+    <div id='container'>
+
+        <div id='header'>
+            <a href='/'><img src='/logo-black-text.png' alt='logo image' class='logo'/></a>
+            <a href='/team' class='nav'>Team</a>
+            <a href='/products' class='nav'>Products</a>
+        </div>
+
+        <div id='main'>
+            <% yield %>
+        </div>
+
+        <div id='footer'>
+            © Fomotograph
+        </div>
+
+    </div>
+
+</body>
+
+</html>
